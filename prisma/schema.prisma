@@ -1,0 +1,449 @@
+// Prisma Schema for Tenders General Merchant Ltd.
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============== USER MANAGEMENT ==============
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  EDITOR
+  CONTENT_MANAGER
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      UserRole @default(EDITOR)
+  avatar    String?
+  isActive  Boolean  @default(true)
+  lastLogin DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  auditLogs AuditLog[]
+
+  @@map("users")
+}
+
+// ============== HERO SLIDER ==============
+
+model HeroSlide {
+  id              String   @id @default(cuid())
+  title           String
+  subtitle        String?
+  backgroundImage String
+  buttonText      String?
+  buttonLink      String?
+  order           Int      @default(0)
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  typewriterWords HeroTypewriterWord[]
+
+  @@map("hero_slides")
+}
+
+model HeroTypewriterWord {
+  id        String    @id @default(cuid())
+  word      String
+  order     Int       @default(0)
+  slideId   String
+  slide     HeroSlide @relation(fields: [slideId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+
+  @@map("hero_typewriter_words")
+}
+
+// ============== PAGES ==============
+
+model Page {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  title           String
+  content         Json?
+  metaTitle       String?
+  metaDescription String?
+  ogImage         String?
+  canonicalUrl    String?
+  isPublished     Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("pages")
+}
+
+// ============== SERVICES ==============
+
+enum ServiceCategory {
+  CONSTRUCTION
+  CIVIL_ENGINEERING
+  PROCUREMENT
+  OIL_GAS
+  SUPPLY
+  DISINFECTION
+  AGRICULTURE
+  CARGO_HANDLING
+  EQUIPMENT_SUPPLY
+  OTHER
+}
+
+model Service {
+  id          String          @id @default(cuid())
+  title       String
+  slug        String          @unique
+  description String
+  content     String?
+  featuredImage String?
+  category    ServiceCategory @default(OTHER)
+  order       Int             @default(0)
+  isActive    Boolean         @default(true)
+  metaTitle   String?
+  metaDescription String?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  images    ServiceImage[]
+  documents ServiceDocument[]
+
+  @@map("services")
+}
+
+model ServiceImage {
+  id        String  @id @default(cuid())
+  url       String
+  alt       String?
+  order     Int     @default(0)
+  serviceId String
+  service   Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@map("service_images")
+}
+
+model ServiceDocument {
+  id        String  @id @default(cuid())
+  name      String
+  url       String
+  size      Int?
+  serviceId String
+  service   Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@map("service_documents")
+}
+
+// ============== PROJECTS ==============
+
+enum ProjectCategory {
+  BUILDING_CONSTRUCTION
+  CIVIL_ENGINEERING
+  OIL_GAS
+  PROCUREMENT
+  AGRICULTURE
+  EQUIPMENT_SUPPLY
+  CARGO_HANDLING
+  OTHER
+}
+
+enum ProjectStatus {
+  ONGOING
+  COMPLETED
+  ARCHIVED
+}
+
+model Project {
+  id             String          @id @default(cuid())
+  projectName    String
+  slug           String          @unique
+  client         String?
+  location       String?
+  description    String
+  content        String?
+  completionDate DateTime?
+  category       ProjectCategory @default(OTHER)
+  status         ProjectStatus   @default(ONGOING)
+  featuredImage  String?
+  isActive       Boolean         @default(true)
+  metaTitle      String?
+  metaDescription String?
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  images    ProjectImage[]
+  documents ProjectDocument[]
+
+  @@map("projects")
+}
+
+model ProjectImage {
+  id        String  @id @default(cuid())
+  url       String
+  alt       String?
+  order     Int     @default(0)
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@map("project_images")
+}
+
+model ProjectDocument {
+  id        String  @id @default(cuid())
+  name      String
+  url       String
+  size      Int?
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@map("project_documents")
+}
+
+// ============== SISTER COMPANIES ==============
+
+model SisterCompany {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  logo        String?
+  description String
+  content     String?
+  websiteUrl  String?
+  email       String?
+  phone       String?
+  address     String?
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  metaTitle   String?
+  metaDescription String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  services SisterCompanyService[]
+  projects SisterCompanyProject[]
+
+  @@map("sister_companies")
+}
+
+model SisterCompanyService {
+  id              String        @id @default(cuid())
+  title           String
+  description     String?
+  order           Int           @default(0)
+  sisterCompanyId String
+  sisterCompany   SisterCompany @relation(fields: [sisterCompanyId], references: [id], onDelete: Cascade)
+  createdAt       DateTime      @default(now())
+
+  @@map("sister_company_services")
+}
+
+model SisterCompanyProject {
+  id              String        @id @default(cuid())
+  title           String
+  description     String?
+  image           String?
+  order           Int           @default(0)
+  sisterCompanyId String
+  sisterCompany   SisterCompany @relation(fields: [sisterCompanyId], references: [id], onDelete: Cascade)
+  createdAt       DateTime      @default(now())
+
+  @@map("sister_company_projects")
+}
+
+// ============== TEAM MEMBERS ==============
+
+model TeamMember {
+  id          String   @id @default(cuid())
+  name        String
+  position    String
+  bio         String?
+  image       String?
+  email       String?
+  linkedIn    String?
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("team_members")
+}
+
+// ============== TESTIMONIALS ==============
+
+model Testimonial {
+  id          String   @id @default(cuid())
+  clientName  String
+  company     String?
+  position    String?
+  content     String
+  rating      Int      @default(5)
+  image       String?
+  isActive    Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("testimonials")
+}
+
+// ============== CONTACT MESSAGES ==============
+
+enum MessageStatus {
+  UNREAD
+  READ
+  REPLIED
+  ARCHIVED
+}
+
+model ContactMessage {
+  id          String        @id @default(cuid())
+  name        String
+  email       String
+  phone       String?
+  company     String?
+  subject     String?
+  message     String
+  status      MessageStatus @default(UNREAD)
+  ipAddress   String?
+  userAgent   String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@map("contact_messages")
+}
+
+// ============== MEDIA LIBRARY ==============
+
+enum MediaType {
+  IMAGE
+  DOCUMENT
+  VIDEO
+  OTHER
+}
+
+model MediaFile {
+  id        String    @id @default(cuid())
+  name      String
+  url       String
+  type      MediaType @default(IMAGE)
+  mimeType  String?
+  size      Int?
+  width     Int?
+  height    Int?
+  alt       String?
+  folder    String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@map("media_files")
+}
+
+// ============== SITE SETTINGS ==============
+
+model SiteSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  type      String   @default("string") // string, json, boolean, number
+  group     String   @default("general")
+  label     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("site_settings")
+}
+
+// ============== AUDIT LOGS ==============
+
+enum AuditAction {
+  CREATE
+  UPDATE
+  DELETE
+  LOGIN
+  LOGOUT
+  UPLOAD
+  VIEW
+}
+
+model AuditLog {
+  id         String      @id @default(cuid())
+  userId     String?
+  user       User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  action     AuditAction
+  resource   String
+  resourceId String?
+  details    Json?
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime    @default(now())
+
+  @@map("audit_logs")
+}
+
+// ============== CAREERS ==============
+
+model JobPosting {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  department  String?
+  location    String?
+  type        String?  // Full-time, Part-time, Contract
+  description String
+  requirements String?
+  salary      String?
+  isActive    Boolean  @default(true)
+  expiresAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  applications JobApplication[]
+
+  @@map("job_postings")
+}
+
+model JobApplication {
+  id         String     @id @default(cuid())
+  jobId      String
+  job        JobPosting @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  name       String
+  email      String
+  phone      String?
+  coverLetter String?
+  resumeUrl  String?
+  status     String     @default("PENDING")
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+
+  @@map("job_applications")
+}
+
+// ============== TENDERS ==============
+
+model TenderSubmission {
+  id          String   @id @default(cuid())
+  companyName String
+  contactName String
+  email       String
+  phone       String?
+  tenderTitle String
+  description String
+  documents   Json?    // Array of document URLs
+  budget      String?
+  deadline    DateTime?
+  status      String   @default("PENDING")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("tender_submissions")
+}
