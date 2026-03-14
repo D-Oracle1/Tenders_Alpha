@@ -1,0 +1,112 @@
+import { z } from 'zod';
+
+export const loginSchema = z.object({
+  email: z.string().email('Invalid email address'),
+  password: z.string().min(6, 'Password must be at least 6 characters'),
+});
+
+export const contactSchema = z.object({
+  name: z.string().min(2, 'Name must be at least 2 characters').max(100),
+  email: z.string().email('Invalid email address'),
+  phone: z.string().optional(),
+  company: z.string().optional(),
+  subject: z.string().optional(),
+  message: z.string().min(10, 'Message must be at least 10 characters').max(5000),
+});
+
+export const heroSlideSchema = z.object({
+  title: z.string().min(1, 'Title is required').max(200),
+  subtitle: z.string().optional(),
+  backgroundImage: z.string().min(1, 'Background image is required'),
+  buttonText: z.string().optional(),
+  buttonLink: z.string().optional(),
+  order: z.number().int().min(0).optional(),
+  isActive: z.boolean().optional(),
+  typewriterWords: z.array(z.object({
+    word: z.string().min(1),
+    order: z.number().int().min(0),
+  })).optional(),
+});
+
+export const serviceSchema = z.object({
+  title: z.string().min(1, 'Title is required').max(200),
+  slug: z.string().optional(),
+  description: z.string().min(1, 'Description is required'),
+  content: z.string().optional(),
+  featuredImage: z.string().optional(),
+  category: z.string().optional(),
+  order: z.number().int().min(0).optional(),
+  isActive: z.boolean().optional(),
+  metaTitle: z.string().optional(),
+  metaDescription: z.string().optional(),
+});
+
+export const projectSchema = z.object({
+  projectName: z.string().min(1, 'Project name is required').max(200),
+  slug: z.string().optional(),
+  client: z.string().optional(),
+  location: z.string().optional(),
+  description: z.string().min(1, 'Description is required'),
+  content: z.string().optional(),
+  completionDate: z.string().optional(),
+  category: z.string().optional(),
+  status: z.string().optional(),
+  featuredImage: z.string().optional(),
+  isActive: z.boolean().optional(),
+  metaTitle: z.string().optional(),
+  metaDescription: z.string().optional(),
+});
+
+export const sisterCompanySchema = z.object({
+  name: z.string().min(1, 'Name is required').max(200),
+  slug: z.string().optional(),
+  logo: z.string().optional(),
+  description: z.string().min(1, 'Description is required'),
+  content: z.string().optional(),
+  websiteUrl: z.string().url().optional().or(z.literal('')),
+  email: z.string().email().optional().or(z.literal('')),
+  phone: z.string().optional(),
+  address: z.string().optional(),
+  order: z.number().int().min(0).optional(),
+  isActive: z.boolean().optional(),
+  metaTitle: z.string().optional(),
+  metaDescription: z.string().optional(),
+});
+
+export const teamMemberSchema = z.object({
+  name: z.string().min(1, 'Name is required').max(200),
+  position: z.string().min(1, 'Position is required').max(200),
+  bio: z.string().optional(),
+  image: z.string().optional(),
+  email: z.string().email().optional().or(z.literal('')),
+  linkedIn: z.string().optional(),
+  order: z.number().int().min(0).optional(),
+  isActive: z.boolean().optional(),
+});
+
+export const testimonialSchema = z.object({
+  clientName: z.string().min(1, 'Client name is required').max(200),
+  company: z.string().optional(),
+  position: z.string().optional(),
+  content: z.string().min(1, 'Testimonial content is required'),
+  rating: z.number().int().min(1).max(5).optional(),
+  image: z.string().optional(),
+  isActive: z.boolean().optional(),
+  order: z.number().int().min(0).optional(),
+});
+
+export const siteSettingSchema = z.object({
+  key: z.string().min(1),
+  value: z.string(),
+  type: z.string().optional(),
+  group: z.string().optional(),
+  label: z.string().optional(),
+});
+
+export const userSchema = z.object({
+  name: z.string().min(1, 'Name is required').max(200),
+  email: z.string().email('Invalid email'),
+  password: z.string().min(8, 'Password must be at least 8 characters').optional(),
+  role: z.enum(['SUPER_ADMIN', 'ADMIN', 'EDITOR', 'CONTENT_MANAGER']).optional(),
+  isActive: z.boolean().optional(),
+});
