@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Careers',
-  description: 'Join the Tenders General Merchant Ltd. team. Explore current job openings and career opportunities.',
+  description: 'Join the Tenders Alpha team. Explore current job openings and career opportunities.',
 };
 
 export default async function CareersPage() {
@@ -39,7 +39,7 @@ export default async function CareersPage() {
                     We don't have any open positions at the moment, but we're always looking for talented people.
                     Send your CV to our email and we'll keep it on file.
                   </p>
-                  <a href="mailto:tendersgeneralmerchant@gmail.com"
+                  <a href="mailto:info@tendersalpha.com"
                     className="btn-primary mt-6 inline-flex">
                     Send Spontaneous Application
                   </a>
@@ -101,7 +101,7 @@ export default async function CareersPage() {
               <div className="bg-gray-50 rounded-2xl p-6">
                 <h3 className="font-bold text-primary mb-3 font-heading">Send Your CV</h3>
                 <p className="text-gray-600 text-sm mb-4">Don't see a suitable position? Send your CV for future opportunities.</p>
-                <a href="mailto:tendersgeneralmerchant@gmail.com" className="btn-outline text-sm w-full justify-center">
+                <a href="mailto:info@tendersalpha.com" className="btn-outline text-sm w-full justify-center">
                   Email Your CV
                 </a>
               </div>

@@ -25,7 +25,7 @@ export default function AboutVisionMission() {
               icon: Target,
               title: 'Our Mission',
               content:
-                'To provide high-quality, innovative, and cost-effective construction, engineering, procurement, and agricultural services while maintaining the highest standards of professionalism, integrity, and environmental responsibility.',
+                'To provide high-quality, innovative, and cost-effective construction, engineering, procurement, beauty/cosmetics, and vocational skills services while maintaining the highest standards of professionalism, integrity, and environmental responsibility.',
               color: 'bg-accent',
             },
             {

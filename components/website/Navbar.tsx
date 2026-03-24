@@ -21,7 +21,8 @@ const navLinks = [
       { label: 'Equipment Supply', href: '/services/equipment-supply' },
       { label: 'Cargo Handling', href: '/services/cargo-handling' },
       { label: 'Disinfection Machines', href: '/services/disinfection-machines' },
-      { label: 'Agricultural Activities', href: '/services/agricultural-activities' },
+      { label: 'Beauty / Cosmetics', href: '/services/beauty-cosmetics' },
+      { label: 'Vocational Skills', href: '/services/vocational-skills' },
     ],
   },
   { label: 'Projects', href: '/projects' },
@@ -30,7 +31,7 @@ const navLinks = [
   { label: 'Contact', href: '/contact' },
 ];
 
-export default function Navbar() {
+export default function Navbar({ companyName = 'Tenders Alpha Limited' }: { companyName?: string }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -63,11 +64,11 @@ export default function Navbar() {
           </div>
           <div className="flex items-center gap-6">
             <a
-              href="mailto:tendersgeneralmerchant@gmail.com"
+              href="mailto:info@tendersalpha.com"
               className="flex items-center gap-2 hover:text-accent transition-colors"
             >
               <Mail size={14} />
-              <span>tendersgeneralmerchant@gmail.com</span>
+              <span>info@tendersalpha.com</span>
             </a>
           </div>
         </div>
@@ -84,14 +85,18 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl font-heading">TG</span>
-              </div>
+              <Image
+                src="/logo.png"
+                alt="Tenders Alpha"
+                width={48}
+                height={48}
+                className="w-12 h-12 object-contain"
+                priority
+              />
               <div className="hidden sm:block">
                 <div className="font-bold text-primary text-lg leading-tight font-heading">
-                  Tenders General
+                  {companyName}
                 </div>
-                <div className="text-accent text-sm font-semibold">Merchant Ltd.</div>
               </div>
             </Link>
 

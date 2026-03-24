@@ -7,7 +7,7 @@ import SectionHeader from '@/components/website/SectionHeader';
 export const metadata: Metadata = {
   title: 'Our Services',
   description:
-    'Tenders General Merchant Ltd. offers comprehensive services in building construction, civil engineering, oil & gas procurement, equipment supply, cargo handling, disinfection, and agriculture.',
+    'Tenders Alpha offers comprehensive services in building construction, civil engineering, oil & gas procurement, equipment supply, cargo handling, disinfection, beauty/cosmetics, and vocational skills.',
 };
 
 export default async function ServicesPage() {
@@ -20,7 +20,7 @@ export default async function ServicesPage() {
     <>
       <PageHero
         title="Our Services"
-        subtitle="Comprehensive solutions across construction, engineering, procurement, and agricultural sectors."
+        subtitle="Comprehensive solutions across construction, engineering, procurement, beauty, and vocational sectors."
         breadcrumbs={[{ label: 'Services' }]}
       />
       <section className="py-20 bg-white">

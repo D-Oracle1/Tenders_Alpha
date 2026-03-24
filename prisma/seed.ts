@@ -9,11 +9,11 @@ async function main() {
   // Create admin user
   const hashedPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD || 'Admin@123456', 12);
   const admin = await prisma.user.upsert({
-    where: { email: process.env.ADMIN_EMAIL || 'admin@tendersgeneralmerchant.com' },
+    where: { email: process.env.ADMIN_EMAIL || 'admin@tendersalpha.com' },
     update: {},
     create: {
       name: 'Super Admin',
-      email: process.env.ADMIN_EMAIL || 'admin@tendersgeneralmerchant.com',
+      email: process.env.ADMIN_EMAIL || 'admin@tendersalpha.com',
       password: hashedPassword,
       role: UserRole.SUPER_ADMIN,
       isActive: true,
@@ -28,7 +28,7 @@ async function main() {
     create: {
       id: 'hero-slide-1',
       title: 'Building the Future',
-      subtitle: 'Tenders General Merchant Ltd. — Your trusted partner in construction, engineering, and procurement.',
+      subtitle: 'Tenders Alpha — Your trusted partner in construction, engineering, and procurement.',
       backgroundImage: '/images/hero/hero-1.jpg',
       buttonText: 'Explore Our Services',
       buttonLink: '/services',
@@ -128,13 +128,22 @@ async function main() {
       order: 6,
     },
     {
-      id: 'svc-agriculture',
-      title: 'Agricultural Activities',
-      slug: 'agricultural-activities',
-      description: 'Our agricultural division provides farming solutions, agro-processing equipment supply, and agricultural consulting services to help boost food production and agribusiness in Nigeria.',
-      category: ServiceCategory.AGRICULTURE,
-      featuredImage: '/images/services/agriculture.jpg',
+      id: 'svc-beauty',
+      title: 'Beauty / Cosmetics',
+      slug: 'beauty-cosmetics',
+      description: 'Our beauty and cosmetics division offers a wide range of professional beauty products, skincare solutions, and cosmetics supply services for individuals and businesses.',
+      category: ServiceCategory.OTHER,
+      featuredImage: '/images/services/beauty.jpg',
       order: 7,
+    },
+    {
+      id: 'svc-vocational',
+      title: 'Vocational Skills',
+      slug: 'vocational-skills',
+      description: 'We provide practical vocational training and skills development programmes in areas such as forex trading, hair beautification, skincare, and other trade skills to empower individuals.',
+      category: ServiceCategory.OTHER,
+      featuredImage: '/images/services/vocational.jpg',
+      order: 8,
     },
   ];
 
@@ -150,40 +159,18 @@ async function main() {
   // Create sister companies
   const sisterCompanies = [
     {
-      id: 'sc-bouygies',
-      name: 'Bouygies Construction',
-      slug: 'bouygies-construction',
-      description: 'Bouygies Construction is a leading construction company specializing in large-scale infrastructure and commercial building projects. As a sister company, we collaborate on major construction contracts across West Africa.',
-      websiteUrl: 'https://www.bouygues-construction.com',
+      id: 'sc-tgm',
+      name: 'Tenders General Merchant Ltd.',
+      slug: 'tenders-general-merchant',
+      description: 'Tenders General Merchant Ltd. is a sister company headquartered in Lagos, Nigeria, specializing in general merchant services, procurement, and supply chain solutions across diverse sectors.',
       order: 1,
     },
     {
-      id: 'sc-greendock',
-      name: 'Green Dock Offshore Limited',
-      slug: 'green-dock-offshore-limited',
-      description: 'Green Dock Offshore Limited specializes in offshore oil and gas operations, marine logistics, and underwater engineering services. The company serves major oil companies operating in the Niger Delta region.',
+      id: 'sc-soibi',
+      name: 'Soibi Alpha House',
+      slug: 'soibi-alpha-house',
+      description: 'Soibi Alpha House is focused on personal and professional development — equipping individuals with practical skills in forex trading, skincare, hair beautification, and other vocational trades.',
       order: 2,
-    },
-    {
-      id: 'sc-eazroc',
-      name: 'Eaz-roc Limited',
-      slug: 'eaz-roc-limited',
-      description: 'Eaz-roc Limited provides specialized engineering and construction services with expertise in structural engineering, project management, and quality assurance for industrial and commercial projects.',
-      order: 3,
-    },
-    {
-      id: 'sc-coginar',
-      name: 'Coginar Limited',
-      slug: 'coginar-limited',
-      description: 'Coginar Limited is a technology and engineering solutions company providing innovative approaches to construction, procurement, and project management challenges in the Nigerian market.',
-      order: 4,
-    },
-    {
-      id: 'sc-entrec',
-      name: 'Entrec Association Limited',
-      slug: 'entrec-association-limited',
-      description: 'Entrec Association Limited specializes in equipment transportation, crane services, and heavy lift operations for construction and industrial projects across Nigeria and beyond.',
-      order: 5,
     },
   ];
 
@@ -202,7 +189,7 @@ async function main() {
       id: 'tm-1',
       name: 'Okechukwu Essumei',
       position: 'Chief Executive Officer',
-      bio: 'With over 15 years of experience in construction and engineering, Mr. Essumei founded Tenders General Merchant Ltd. with a vision to provide world-class services to Nigeria and beyond.',
+      bio: 'With over 15 years of experience in construction and engineering, Mr. Essumei founded Tenders Alpha with a vision to provide world-class services to Nigeria and beyond.',
       email: 'okechukwuessumei@gmail.com',
       order: 1,
     },
@@ -238,7 +225,7 @@ async function main() {
       clientName: 'Engr. Adebayo Okafor',
       company: 'Lagos State Government',
       position: 'Director of Works',
-      content: 'Tenders General Merchant Ltd. delivered our road construction project ahead of schedule and within budget. Their professionalism and quality of work is unmatched.',
+      content: 'Tenders Alpha delivered our road construction project ahead of schedule and within budget. Their professionalism and quality of work is unmatched.',
       rating: 5,
       order: 1,
     },
@@ -247,7 +234,7 @@ async function main() {
       clientName: 'Mrs. Chioma Nwosu',
       company: 'Niger Delta Development Commission',
       position: 'Project Manager',
-      content: 'We have worked with Tenders General Merchant on multiple oil and gas procurement projects. Their supply chain efficiency and quality assurance process is exceptional.',
+      content: 'We have worked with Tenders Alpha on multiple oil and gas procurement projects. Their supply chain efficiency and quality assurance process is exceptional.',
       rating: 5,
       order: 2,
     },
@@ -342,8 +329,8 @@ async function main() {
         testimonialsEnabled: true,
         contactEnabled: true,
       },
-      metaTitle: 'Tenders General Merchant Ltd. | Building & Civil Engineering | Oil & Gas Procurement',
-      metaDescription: 'Tenders General Merchant Ltd. is a leading indigenous company in Nigeria offering building construction, civil engineering, oil & gas procurement, equipment supply, cargo handling, and agricultural services.',
+      metaTitle: 'Tenders Alpha | Building & Civil Engineering | Oil & Gas Procurement',
+      metaDescription: 'Tenders Alpha is a leading indigenous company in Nigeria offering building construction, civil engineering, oil & gas procurement, equipment supply, cargo handling, and agricultural services.',
     },
     {
       slug: 'about',
@@ -355,8 +342,8 @@ async function main() {
         founded: '2009',
         incorporated: '2012',
       },
-      metaTitle: 'About Tenders General Merchant Ltd. | Our Story, Vision & Mission',
-      metaDescription: 'Learn about Tenders General Merchant Ltd., founded in 2009 and incorporated in 2012. Discover our vision, mission, and commitment to excellence in construction and engineering.',
+      metaTitle: 'About Tenders Alpha | Our Story, Vision & Mission',
+      metaDescription: 'Learn about Tenders Alpha, founded in 2009 and incorporated in 2012. Discover our vision, mission, and commitment to excellence in construction and engineering.',
     },
   ];
 
@@ -371,16 +358,16 @@ async function main() {
 
   // Create site settings
   const settings = [
-    { key: 'company_name', value: 'Tenders General Merchant Ltd.', group: 'general', label: 'Company Name' },
+    { key: 'company_name', value: 'Tenders Alpha Limited', group: 'general', label: 'Company Name' },
     { key: 'company_tagline', value: 'Building Excellence, Delivering Solutions', group: 'general', label: 'Company Tagline' },
-    { key: 'company_description', value: 'Tenders General Merchant Ltd. is a multi-faceted indigenous company with interests in Building Construction, Civil Engineering, Oil & Gas Procurement, Equipment Supply, Cargo Handling, Disinfection Machines, and Agricultural Activities.', group: 'general', label: 'Company Description' },
+    { key: 'company_description', value: 'Tenders Alpha Limited is a multi-faceted indigenous company with interests in Building Construction, Civil Engineering, Oil & Gas Procurement, Equipment Supply, Cargo Handling, Disinfection Machines, Beauty/Cosmetics, and Vocational Skills.', group: 'general', label: 'Company Description' },
     { key: 'founded_year', value: '2009', group: 'general', label: 'Founded Year' },
     { key: 'incorporated_year', value: '2012', group: 'general', label: 'Incorporated Year' },
     { key: 'head_office_address', value: '18 Essumei Street Off White House Bus Stop Okokomaiko Badagry Expressway Lagos State', group: 'contact', label: 'Head Office Address' },
     { key: 'branch_office_address', value: '9 Farm Road Off Location Bus Stop Mbuogba NTA Road Port Harcourt Rivers State', group: 'contact', label: 'Branch Office Address' },
     { key: 'phone_1', value: '07065220758', group: 'contact', label: 'Primary Phone' },
     { key: 'phone_2', value: '08073175838', group: 'contact', label: 'Secondary Phone' },
-    { key: 'email_1', value: 'tendersgeneralmerchant@gmail.com', group: 'contact', label: 'Primary Email' },
+    { key: 'email_1', value: 'info@tendersalpha.com', group: 'contact', label: 'Primary Email' },
     { key: 'email_2', value: 'okechukwuessumei@gmail.com', group: 'contact', label: 'Secondary Email' },
     { key: 'facebook_url', value: '', group: 'social', label: 'Facebook URL' },
     { key: 'twitter_url', value: '', group: 'social', label: 'Twitter/X URL' },
@@ -388,7 +375,7 @@ async function main() {
     { key: 'instagram_url', value: '', group: 'social', label: 'Instagram URL' },
     { key: 'youtube_url', value: '', group: 'social', label: 'YouTube URL' },
     { key: 'google_maps_embed', value: 'https://maps.google.com/maps?q=Okokomaiko+Lagos&output=embed', group: 'contact', label: 'Google Maps Embed URL' },
-    { key: 'meta_title', value: 'Tenders General Merchant Ltd. | Construction, Engineering & Procurement', group: 'seo', label: 'Default Meta Title' },
+    { key: 'meta_title', value: 'Tenders Alpha | Construction, Engineering & Procurement', group: 'seo', label: 'Default Meta Title' },
     { key: 'meta_description', value: 'Nigeria\'s trusted partner in building construction, civil engineering, oil & gas procurement, and agricultural services. Founded 2009.', group: 'seo', label: 'Default Meta Description' },
     { key: 'og_image', value: '/images/og-image.jpg', group: 'seo', label: 'Default OG Image' },
     { key: 'company_profile_url', value: '/documents/company-profile.pdf', group: 'general', label: 'Company Profile PDF URL' },

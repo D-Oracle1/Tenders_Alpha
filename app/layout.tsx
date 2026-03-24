@@ -17,41 +17,41 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Tenders General Merchant Ltd. | Construction, Engineering & Procurement',
-    template: '%s | Tenders General Merchant Ltd.',
+    default: 'Tenders Alpha | Construction, Engineering & Procurement',
+    template: '%s | Tenders Alpha',
   },
   description:
-    "Nigeria's trusted partner in building construction, civil engineering, oil & gas procurement, equipment supply, cargo handling, and agricultural services. Founded 2009.",
+    "Nigeria's trusted partner in building construction, civil engineering, oil & gas procurement, equipment supply, cargo handling, beauty/cosmetics, and vocational skills. Founded 2009.",
   keywords: [
-    'Tenders General Merchant',
+    'Tenders Alpha',
     'building construction Nigeria',
     'civil engineering Lagos',
     'oil gas procurement',
     'equipment supply Nigeria',
     'cargo handling Port Harcourt',
   ],
-  authors: [{ name: 'Tenders General Merchant Ltd.' }],
-  creator: 'Tenders General Merchant Ltd.',
+  authors: [{ name: 'Tenders Alpha' }],
+  creator: 'Tenders Alpha',
   openGraph: {
     type: 'website',
     locale: 'en_NG',
     url: process.env.NEXT_PUBLIC_APP_URL,
-    siteName: 'Tenders General Merchant Ltd.',
-    title: 'Tenders General Merchant Ltd. | Construction, Engineering & Procurement',
+    siteName: 'Tenders Alpha',
+    title: 'Tenders Alpha | Construction, Engineering & Procurement',
     description:
-      "Nigeria's trusted partner in building construction, civil engineering, oil & gas procurement, and agricultural services.",
+      "Nigeria's trusted partner in building construction, civil engineering, oil & gas procurement, beauty/cosmetics, and vocational skills.",
     images: [
       {
         url: '/images/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Tenders General Merchant Ltd.',
+        alt: 'Tenders Alpha',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Tenders General Merchant Ltd.',
+    title: 'Tenders Alpha',
     description: "Nigeria's trusted construction, engineering & procurement company.",
   },
   robots: {
@@ -66,8 +66,8 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
+    icon: '/logo.png',
+    apple: '/logo.png',
   },
 };
 
