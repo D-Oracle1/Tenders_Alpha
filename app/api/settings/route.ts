@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import prisma from '@/lib/prisma';
 import { requireAuth, logAudit } from '@/lib/auth';
 
@@ -50,6 +51,8 @@ export async function POST(request: NextRequest) {
         )
       );
       await logAudit(authUser.userId, 'UPDATE', 'site_settings', undefined, { count: updates.length });
+      // Revalidate all public pages so CMS changes appear immediately
+      revalidatePath('/', 'layout');
       return NextResponse.json({ settings: updates });
     }
 
@@ -66,6 +69,7 @@ export async function POST(request: NextRequest) {
     });
 
     await logAudit(authUser.userId, 'UPDATE', 'site_settings', setting.id, { key: setting.key });
+    revalidatePath('/', 'layout');
     return NextResponse.json({ setting });
   } catch (error) {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

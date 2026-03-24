@@ -1,3 +1,5 @@
+export const revalidate = 0;
+
 import prisma from '@/lib/prisma';
 import HeroSlider from '@/components/website/HeroSlider';
 import HomeAboutSection from '@/components/website/sections/HomeAboutSection';

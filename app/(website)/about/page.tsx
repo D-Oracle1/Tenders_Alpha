@@ -1,3 +1,5 @@
+export const revalidate = 0;
+
 import { Metadata } from 'next';
 import prisma from '@/lib/prisma';
 import AboutHero from '@/components/website/about/AboutHero';

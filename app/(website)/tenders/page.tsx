@@ -1,3 +1,5 @@
+export const revalidate = 0;
+
 import { Metadata } from 'next';
 import PageHero from '@/components/website/PageHero';
 import TenderForm from '@/components/website/TenderForm';

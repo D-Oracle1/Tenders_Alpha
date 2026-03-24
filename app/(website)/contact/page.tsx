@@ -1,3 +1,5 @@
+export const revalidate = 0;
+
 import { Metadata } from 'next';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 import PageHero from '@/components/website/PageHero';

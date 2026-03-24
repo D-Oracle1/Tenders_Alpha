@@ -1,3 +1,5 @@
+export const revalidate = 0;
+
 import { Metadata } from 'next';
 import prisma from '@/lib/prisma';
 import PageHero from '@/components/website/PageHero';
@@ -6,7 +8,7 @@ import ProjectsGrid from '@/components/website/ProjectsGrid';
 export const metadata: Metadata = {
   title: 'Projects Portfolio',
   description:
-    'Explore the project portfolio of Tenders General Merchant Ltd. — construction, engineering, and procurement projects across Nigeria.',
+    'Explore the project portfolio of Tenders Alpha — construction, engineering, and procurement projects across Nigeria.',
 };
 
 export default async function ProjectsPage() {

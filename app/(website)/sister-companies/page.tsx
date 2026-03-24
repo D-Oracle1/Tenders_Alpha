@@ -1,3 +1,5 @@
+export const revalidate = 0;
+
 import { Metadata } from 'next';
 import Link from 'next/link';
 import prisma from '@/lib/prisma';
@@ -6,7 +8,7 @@ import { ArrowRight, ExternalLink } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Sister Companies',
-  description: "Explore Tenders General Merchant Ltd.'s network of sister companies and strategic partnerships.",
+  description: "Explore Tenders Alpha's network of sister companies and strategic partnerships.",
 };
 
 export default async function SisterCompaniesPage() {
