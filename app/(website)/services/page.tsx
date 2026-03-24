@@ -5,9 +5,9 @@ import PageHero from '@/components/website/PageHero';
 import SectionHeader from '@/components/website/SectionHeader';
 
 export const metadata: Metadata = {
-  title: 'Our Services',
+  title: 'Our Services — Procurement, Construction & Tender Management Nigeria',
   description:
-    'Tenders Alpha offers comprehensive services in building construction, civil engineering, oil & gas procurement, equipment supply, cargo handling, disinfection, beauty/cosmetics, and vocational skills.',
+    'Tenders Alpha delivers procurement, construction, oil & gas, equipment supply, cargo handling, beauty/cosmetics, and vocational skills services across Nigeria and Africa.',
 };
 
 export default async function ServicesPage() {

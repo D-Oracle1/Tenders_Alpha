@@ -5,8 +5,9 @@ import { Briefcase, MapPin, Clock } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Careers',
-  description: 'Join the Tenders Alpha team. Explore current job openings and career opportunities.',
+  title: 'Careers — Join Nigeria\'s Leading Procurement Company',
+  description:
+    'Build your career at Tenders Alpha Limited — Nigeria\'s top procurement and tender management company. Explore job openings in Lagos, Port Harcourt, and beyond.',
 };
 
 export default async function CareersPage() {

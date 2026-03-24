@@ -16,43 +16,53 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://tendersalpha.com'),
   title: {
-    default: 'Tenders Alpha | Construction, Engineering & Procurement',
+    default: 'Tenders Alpha | Tender & Procurement Platform Nigeria',
     template: '%s | Tenders Alpha',
   },
   description:
-    "Nigeria's trusted partner in building construction, civil engineering, oil & gas procurement, equipment supply, cargo handling, beauty/cosmetics, and vocational skills. Founded 2009.",
+    "Nigeria's #1 tender management and procurement platform. Submit tenders, manage bids, and streamline procurement for government, enterprises & NGOs. Founded 2009.",
   keywords: [
+    'tender management system Nigeria',
+    'procurement software Nigeria',
+    'bid management platform Nigeria',
+    'e-procurement system Africa',
+    'tender portal Nigeria',
+    'digital procurement solution Nigeria',
+    'vendor management software Nigeria',
+    'contract management Nigeria',
+    'government procurement portal Nigeria',
+    'online tender submission Nigeria',
     'Tenders Alpha',
     'building construction Nigeria',
     'civil engineering Lagos',
-    'oil gas procurement',
+    'oil gas procurement Nigeria',
     'equipment supply Nigeria',
-    'cargo handling Port Harcourt',
   ],
-  authors: [{ name: 'Tenders Alpha' }],
-  creator: 'Tenders Alpha',
+  authors: [{ name: 'Tenders Alpha Limited' }],
+  creator: 'Tenders Alpha Limited',
   openGraph: {
     type: 'website',
     locale: 'en_NG',
-    url: process.env.NEXT_PUBLIC_APP_URL,
+    url: process.env.NEXT_PUBLIC_APP_URL || 'https://tendersalpha.com',
     siteName: 'Tenders Alpha',
-    title: 'Tenders Alpha | Construction, Engineering & Procurement',
+    title: 'Tenders Alpha | Tender & Procurement Platform Nigeria',
     description:
-      "Nigeria's trusted partner in building construction, civil engineering, oil & gas procurement, beauty/cosmetics, and vocational skills.",
+      "Nigeria's #1 tender management and procurement platform. Submit tenders, manage bids, and streamline procurement for government, enterprises & NGOs across Africa.",
     images: [
       {
         url: '/images/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Tenders Alpha',
+        alt: 'Tenders Alpha — Nigeria Tender & Procurement Platform',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Tenders Alpha',
-    description: "Nigeria's trusted construction, engineering & procurement company.",
+    title: 'Tenders Alpha | Tender & Procurement Platform Nigeria',
+    description: "Nigeria's trusted tender management, procurement & bid submission platform. Serving government, enterprises & NGOs across Africa.",
   },
   robots: {
     index: true,

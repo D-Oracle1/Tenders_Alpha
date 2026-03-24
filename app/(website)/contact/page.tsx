@@ -4,9 +4,9 @@ import PageHero from '@/components/website/PageHero';
 import ContactForm from '@/components/website/ContactForm';
 
 export const metadata: Metadata = {
-  title: 'Contact Us',
+  title: 'Contact Us — Get in Touch With Our Procurement Team',
   description:
-    'Get in touch with Tenders General Merchant Ltd. Contact our offices in Lagos and Port Harcourt for project inquiries, quotes, and partnership opportunities.',
+    'Contact Tenders Alpha Limited for tender inquiries, procurement partnerships, and project quotes. Offices in Lagos, Port Harcourt & UK. Response within 24 hours.',
 };
 
 export default function ContactPage() {
@@ -39,8 +39,8 @@ export default function ContactPage() {
                   <h3 className="font-bold text-primary font-heading">Head Office — Lagos</h3>
                 </div>
                 <p className="text-gray-600 text-sm leading-relaxed">
-                  18 Essumei Street Off White House Bus Stop,<br />
-                  Okokomaiko Badagry Expressway,<br />
+                  A5 Victoria Bay Annex Off Royal Pine Estate Gate 3<br />
+                  by Orchid Road, Eleganza, Lekki Phase 2,<br />
                   Lagos State, Nigeria
                 </p>
               </div>
@@ -54,29 +54,42 @@ export default function ContactPage() {
                   <h3 className="font-bold text-primary font-heading">Branch Office — Port Harcourt</h3>
                 </div>
                 <p className="text-gray-600 text-sm leading-relaxed">
-                  9 Farm Road Off Location Bus Stop,<br />
-                  Mbuogba NTA Road,<br />
+                  2 Melbourne Close off Aker Road, Iwofe,<br />
                   Port Harcourt, Rivers State, Nigeria
+                </p>
+              </div>
+
+              {/* UK Office */}
+              <div className="bg-gray-50 rounded-2xl p-6">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-8 h-8 bg-primary-700 rounded-lg flex items-center justify-center">
+                    <MapPin size={16} className="text-white" />
+                  </div>
+                  <h3 className="font-bold text-primary font-heading">UK Office — Southampton</h3>
+                </div>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Cranbury Place,<br />
+                  Southampton, United Kingdom SO14 0LG
                 </p>
               </div>
 
               {/* Contact Details */}
               <div className="space-y-3">
-                <a href="tel:07065220758" className="flex items-center gap-3 text-gray-700 hover:text-primary transition-colors">
+                <a href="tel:+447771098749" className="flex items-center gap-3 text-gray-700 hover:text-primary transition-colors">
                   <Phone size={18} className="text-accent" />
-                  <span>07065220758</span>
+                  <span>+44 7771 098749</span>
                 </a>
-                <a href="tel:08073175838" className="flex items-center gap-3 text-gray-700 hover:text-primary transition-colors">
+                <a href="tel:+2348101365496" className="flex items-center gap-3 text-gray-700 hover:text-primary transition-colors">
                   <Phone size={18} className="text-accent" />
-                  <span>08073175838</span>
+                  <span>+234 8101 365496</span>
                 </a>
-                <a href="mailto:tendersgeneralmerchant@gmail.com" className="flex items-center gap-3 text-gray-700 hover:text-primary transition-colors">
+                <a href="mailto:info@tendersalpha.com" className="flex items-center gap-3 text-gray-700 hover:text-primary transition-colors">
                   <Mail size={18} className="text-accent" />
-                  <span className="text-sm">tendersgeneralmerchant@gmail.com</span>
+                  <span className="text-sm">info@tendersalpha.com</span>
                 </a>
-                <a href="mailto:okechukwuessumei@gmail.com" className="flex items-center gap-3 text-gray-700 hover:text-primary transition-colors">
+                <a href="mailto:Soibi.opaibomari@tendersalpha.com" className="flex items-center gap-3 text-gray-700 hover:text-primary transition-colors">
                   <Mail size={18} className="text-accent" />
-                  <span className="text-sm">okechukwuessumei@gmail.com</span>
+                  <span className="text-sm">Soibi.opaibomari@tendersalpha.com</span>
                 </a>
               </div>
 
