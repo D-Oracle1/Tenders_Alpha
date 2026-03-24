@@ -26,6 +26,7 @@ interface HeroSlide {
 
 interface HeroSliderProps {
   slides: HeroSlide[];
+  foundedYear?: string;
 }
 
 // Default slides for when data loads
@@ -47,7 +48,7 @@ const defaultSlides: HeroSlide[] = [
   },
 ];
 
-export default function HeroSlider({ slides }: HeroSliderProps) {
+export default function HeroSlider({ slides, foundedYear = '2019' }: HeroSliderProps) {
   const activeSlides = slides.length > 0 ? slides : defaultSlides;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
@@ -120,7 +121,7 @@ export default function HeroSlider({ slides }: HeroSliderProps) {
                   className="inline-flex items-center gap-2 bg-accent/20 border border-accent/40 text-white px-4 py-1.5 rounded-full text-sm font-medium mb-6"
                 >
                   <span className="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
-                  Indigenous Nigerian Company • Est. 2009
+                  Indigenous Nigerian Company • Est. {foundedYear}
                 </motion.div>
 
                 {/* Title */}
@@ -235,7 +236,7 @@ export default function HeroSlider({ slides }: HeroSliderProps) {
               { label: 'Years Experience', value: '15+' },
               { label: 'Projects Completed', value: '200+' },
               { label: 'Service Categories', value: '7' },
-              { label: 'Sister Companies', value: '5' },
+              { label: 'Client Satisfaction', value: '100%' },
             ].map((stat) => (
               <div key={stat.label}>
                 <div className="text-2xl font-bold text-accent font-heading">{stat.value}</div>

@@ -94,7 +94,7 @@ async function getHomeData() {
       where: {
         key: {
           in: [
-            'company_profile_url',
+            'company_profile_url', 'founded_year',
             'home_about_title', 'home_about_subtitle', 'home_about_description', 'home_about_highlights',
             'stat_1_value', 'stat_1_label', 'stat_2_value', 'stat_2_label',
             'stat_3_value', 'stat_3_label', 'stat_4_value', 'stat_4_label',
@@ -119,7 +119,7 @@ export default async function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <HeroSlider slides={slides as any} />
+      <HeroSlider slides={slides as any} foundedYear={homeSettings.founded_year} />
       <HomeAboutSection settings={homeSettings} />
       <HomeServicesSection services={services} />
       <HomeProjectsSection projects={projects} />
