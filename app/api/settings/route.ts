@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ settings, settingsMap });
   } catch (error) {
     console.error('[GET /api/settings] error:', error);
-    return NextResponse.json({ error: 'Internal server error', detail: String(error) }, { status: 500 });
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 
@@ -39,8 +39,9 @@ export async function POST(request: NextRequest) {
 
     // Batch update settings
     if (Array.isArray(body)) {
-      const updates = await Promise.all(
-        body.map((s: { key: string; value: string; group?: string; label?: string }) =>
+      const items = body as { key: string; value: string; group?: string; label?: string }[];
+      const updates = await prisma.$transaction(
+        items.map((s) =>
           prisma.siteSetting.upsert({
             where: { key: s.key },
             update: { value: s.value },
