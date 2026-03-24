@@ -25,7 +25,8 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ settings, settingsMap });
   } catch (error) {
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    console.error('[GET /api/settings] error:', error);
+    return NextResponse.json({ error: 'Internal server error', detail: String(error) }, { status: 500 });
   }
 }
 
