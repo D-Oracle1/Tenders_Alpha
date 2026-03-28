@@ -30,7 +30,7 @@ export const heroSlideSchema = z.object({
 
 export const serviceSchema = z.object({
   title: z.string().min(1, 'Title is required').max(200),
-  slug: z.string().nullish(),
+  slug: z.string().optional(),
   description: z.string().min(1, 'Description is required'),
   content: z.string().nullish(),
   featuredImage: z.string().nullish(),
