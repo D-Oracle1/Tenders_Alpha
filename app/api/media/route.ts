@@ -32,8 +32,9 @@ export async function GET(request: NextRequest) {
       files,
       pagination: { page, limit, total, pages: Math.ceil(total / limit) },
     });
-  } catch (error) {
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  } catch (error: any) {
+    console.error('Media GET error:', error);
+    return NextResponse.json({ error: error.message || 'Internal server error' }, { status: 500 });
   }
 }
 
