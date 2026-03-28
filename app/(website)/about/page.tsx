@@ -38,7 +38,7 @@ export default async function AboutPage() {
 
   return (
     <>
-      <AboutHero />
+      <AboutHero foundedYear={s.founded_year} incorporatedYear={s.incorporated_year} />
       <AboutCompanyOverview
         overview={s.company_overview}
         foundedYear={s.founded_year}

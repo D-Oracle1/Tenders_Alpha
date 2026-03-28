@@ -1,4 +1,4 @@
-# Tenders General Merchant Ltd. — Website & CMS Setup Guide
+# Tenders Alpha — Website & CMS Setup Guide
 
 ## Overview
 
@@ -312,7 +312,7 @@ Key tables:
 
 ## Company Information
 
-**Tenders General Merchant Ltd.**
+**Tenders Alpha**
 
 - **Head Office**: 18 Essumei Street Off White House Bus Stop, Okokomaiko Badagry Expressway, Lagos State
 - **Branch Office**: 9 Farm Road Off Location Bus Stop, Mbuogba NTA Road, Port Harcourt, Rivers State

@@ -43,7 +43,7 @@ export default function HomeWhyChooseUs() {
       <div className="container-custom">
         <SectionHeader
           badge="Why Choose Us"
-          title="The Tenders General Advantage"
+          title="The Tenders Alpha Advantage"
           subtitle="We combine expertise, innovation, and integrity to deliver solutions that create lasting value for our clients and communities."
         />
 

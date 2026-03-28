@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { MapPin, Calendar, ArrowRight } from 'lucide-react';
-import { PROJECT_CATEGORY_LABELS, PROJECT_STATUS_LABELS, formatDate } from '@/lib/utils';
+import { MapPin, ArrowUpRight } from 'lucide-react';
+import { PROJECT_CATEGORY_LABELS, PROJECT_STATUS_LABELS } from '@/lib/utils';
 import { cn } from '@/lib/utils';
 
 interface ProjectCardProps {
@@ -21,93 +21,81 @@ interface ProjectCardProps {
   index?: number;
 }
 
+const statusDot: Record<string, string> = {
+  COMPLETED: 'bg-emerald-400',
+  ONGOING: 'bg-blue-400',
+  PLANNED: 'bg-amber-400',
+};
+
 export default function ProjectCard({
-  id,
   projectName,
   slug,
-  client,
   location,
   description,
   featuredImage,
   category,
   status,
-  completionDate,
   index = 0,
 }: ProjectCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
     >
-      <Link href={`/projects/${slug}`} className="card group block h-full">
+      <Link
+        href={`/projects/${slug}`}
+        className="group block border border-gray-100 hover:border-primary/20 rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5"
+      >
         {/* Image */}
-        <div className="relative h-56 overflow-hidden bg-gray-100">
+        <div className="relative h-56 overflow-hidden bg-gray-50">
           {featuredImage ? (
             <Image
               src={featuredImage}
               alt={projectName}
               fill
-              className="object-cover group-hover:scale-105 transition-transform duration-500"
+              className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
             />
           ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary-700 flex items-center justify-center">
-              <span className="text-6xl">🏗️</span>
+            <div className="absolute inset-0 bg-primary/5 flex items-center justify-center">
+              <span className="text-5xl opacity-30">🏗️</span>
             </div>
           )}
-          <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/20 transition-colors duration-300" />
-          <div className="absolute top-3 left-3 flex gap-2">
-            <span className="badge-primary text-xs">
+          {/* Category pill — clean, bottom-left */}
+          <div className="absolute bottom-3 left-3">
+            <span className="bg-white/90 backdrop-blur-sm text-primary text-[10px] font-semibold tracking-wider uppercase px-3 py-1 rounded-full">
               {PROJECT_CATEGORY_LABELS[category] || category}
-            </span>
-          </div>
-          <div className="absolute top-3 right-3">
-            <span
-              className={cn(
-                'badge text-xs',
-                status === 'COMPLETED' ? 'bg-green-100 text-green-700' :
-                status === 'ONGOING' ? 'bg-blue-100 text-blue-700' :
-                'bg-gray-100 text-gray-700'
-              )}
-            >
-              {PROJECT_STATUS_LABELS[status] || status}
             </span>
           </div>
         </div>
 
         {/* Content */}
         <div className="p-6">
-          <h3 className="text-lg font-bold text-primary mb-2 group-hover:text-accent transition-colors font-heading line-clamp-2">
-            {projectName}
-          </h3>
-
-          <div className="flex flex-wrap gap-3 mb-3 text-xs text-gray-500">
+          {/* Status row */}
+          <div className="flex items-center gap-2 mb-2">
+            <span className={cn('w-1.5 h-1.5 rounded-full', statusDot[status] || 'bg-gray-400')} />
+            <span className="text-[11px] font-semibold tracking-widest uppercase text-gray-400">
+              {PROJECT_STATUS_LABELS[status] || status}
+            </span>
             {location && (
-              <span className="flex items-center gap-1">
-                <MapPin size={12} />
-                {location}
-              </span>
-            )}
-            {completionDate && (
-              <span className="flex items-center gap-1">
-                <Calendar size={12} />
-                {formatDate(completionDate)}
-              </span>
+              <>
+                <span className="text-gray-200">·</span>
+                <span className="flex items-center gap-1 text-[11px] text-gray-400">
+                  <MapPin size={10} />
+                  {location}
+                </span>
+              </>
             )}
           </div>
 
-          {client && (
-            <p className="text-xs text-gray-500 mb-2">
-              Client: <span className="font-medium text-gray-700">{client}</span>
-            </p>
-          )}
-
-          <p className="text-gray-600 text-sm leading-relaxed line-clamp-2 mb-4">{description}</p>
-
-          <div className="flex items-center gap-2 text-accent text-sm font-semibold">
-            View Project
-            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+          <h3 className="text-base font-bold text-primary mb-2 font-heading group-hover:text-accent transition-colors duration-300 line-clamp-2">
+            {projectName}
+          </h3>
+          <p className="text-gray-500 text-sm leading-relaxed line-clamp-2 mb-5">{description}</p>
+          <div className="flex items-center gap-1.5 text-primary text-xs font-semibold">
+            <span className="group-hover:underline underline-offset-4">View project</span>
+            <ArrowUpRight size={13} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
           </div>
         </div>
       </Link>

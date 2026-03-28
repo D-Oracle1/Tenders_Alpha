@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import {
   LayoutDashboard,
   Image as ImageIcon,
@@ -48,11 +49,12 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
   const [user, setUser] = useState<{ name: string; email: string; role: string } | null>(null);
 
   useEffect(() => {
-    fetch('/api/auth/me')
-      .then((r) => r.json())
-      .then((data) => setUser(data.user))
+    if (pathname === '/admin/login') return;
+    fetch('/api/auth/me', { credentials: 'include' })
+      .then((r) => r.ok ? r.json() : null)
+      .then((data) => data && setUser(data.user))
       .catch(() => {});
-  }, []);
+  }, [pathname]);
 
   const handleLogout = async () => {
     await fetch('/api/auth/logout', { method: 'POST' });
@@ -75,14 +77,14 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
         <div className="h-16 flex items-center px-4 border-b border-white/10 flex-shrink-0">
           {sidebarOpen ? (
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                <span className="text-white font-bold text-sm font-heading">TG</span>
+              <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center flex-shrink-0">
+                <Image src="/logo.png" alt="Tenders Alpha" width={28} height={28} className="w-7 h-7 object-contain" />
               </div>
-              <span className="text-white font-bold text-sm font-heading">TGM Admin</span>
+              <span className="text-white font-bold text-sm font-heading">Tenders Alpha Admin</span>
             </div>
           ) : (
-            <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center mx-auto">
-              <span className="text-white font-bold text-sm font-heading">TG</span>
+            <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center mx-auto">
+              <Image src="/logo.png" alt="Tenders Alpha" width={28} height={28} className="w-7 h-7 object-contain" />
             </div>
           )}
         </div>
@@ -149,10 +151,8 @@ export default function AdminLayoutClient({ children }: { children: React.ReactN
             <Link href="/" target="_blank" className="text-xs text-gray-500 hover:text-primary transition-colors">
               View Website ↗
             </Link>
-            <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-              <span className="text-white text-xs font-bold font-heading">
-                {user?.name?.charAt(0) || 'A'}
-              </span>
+            <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center overflow-hidden border border-gray-200">
+              <Image src="/logo.png" alt="Tenders Alpha" width={32} height={32} className="w-full h-full object-contain" />
             </div>
           </div>
         </header>

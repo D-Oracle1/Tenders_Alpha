@@ -56,7 +56,7 @@ export default function TendersManagerClient() {
                       <p className="text-gray-500 text-xs">{t.contactName} • {t.email}</p>
                     </td>
                     <td className="px-4 py-3 hidden md:table-cell text-sm text-gray-700">{t.tenderTitle}</td>
-                    <td className="px-4 py-3 hidden sm:table-cell text-sm text-gray-500">{new Date(t.createdAt).toLocaleDateString()}</td>
+                    <td className="px-4 py-3 hidden sm:table-cell text-sm text-gray-500" suppressHydrationWarning>{new Date(t.createdAt).toLocaleDateString()}</td>
                     <td className="px-4 py-3">
                       <button onClick={() => setSelected(t)} className="p-1.5 rounded hover:bg-gray-100 ml-auto flex"><Eye size={15} className="text-primary" /></button>
                     </td>
@@ -82,7 +82,7 @@ export default function TendersManagerClient() {
                   <div><p className="text-gray-500">Email</p><a href={`mailto:${selected.email}`} className="font-semibold text-primary">{selected.email}</a></div>
                   {selected.phone && <div><p className="text-gray-500">Phone</p><p className="font-semibold">{selected.phone}</p></div>}
                   {selected.budget && <div><p className="text-gray-500">Budget</p><p className="font-semibold">{selected.budget}</p></div>}
-                  {selected.deadline && <div><p className="text-gray-500">Deadline</p><p className="font-semibold">{new Date(selected.deadline).toLocaleDateString()}</p></div>}
+                  {selected.deadline && <div><p className="text-gray-500">Deadline</p><p className="font-semibold" suppressHydrationWarning>{new Date(selected.deadline).toLocaleDateString()}</p></div>}
                 </div>
                 <div><p className="text-gray-500 mb-1">Tender Title</p><p className="font-semibold">{selected.tenderTitle}</p></div>
                 <div><p className="text-gray-500 mb-1">Description</p><div className="bg-gray-50 rounded-xl p-4 text-gray-700 whitespace-pre-wrap">{selected.description}</div></div>

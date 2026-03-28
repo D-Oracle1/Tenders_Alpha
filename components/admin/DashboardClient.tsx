@@ -66,7 +66,7 @@ export default function DashboardClient({ data }: { data: DashboardData }) {
     <div>
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900 font-heading">Dashboard</h1>
-        <p className="text-gray-500 text-sm mt-1">Welcome to the Tenders General Merchant CMS</p>
+        <p className="text-gray-500 text-sm mt-1">Welcome to the Tenders Alpha Admin Panel</p>
       </div>
 
       {/* Stats Grid */}
@@ -128,7 +128,7 @@ export default function DashboardClient({ data }: { data: DashboardData }) {
                     </div>
                     <p className="text-xs text-gray-500 truncate">{msg.subject || msg.email}</p>
                   </div>
-                  <span className="text-xs text-gray-400 flex-shrink-0">
+                  <span className="text-xs text-gray-400 flex-shrink-0" suppressHydrationWarning>
                     {new Date(msg.createdAt).toLocaleDateString()}
                   </span>
                 </Link>
@@ -166,7 +166,7 @@ export default function DashboardClient({ data }: { data: DashboardData }) {
                       {' '}
                       <span className="text-gray-500">{log.resource.replace(/_/g, ' ')}</span>
                     </p>
-                    <p className="text-xs text-gray-400">{new Date(log.createdAt).toLocaleString()}</p>
+                    <p className="text-xs text-gray-400" suppressHydrationWarning>{new Date(log.createdAt).toLocaleString()}</p>
                   </div>
                 </div>
               ))

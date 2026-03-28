@@ -21,7 +21,7 @@ export async function signToken(payload: Omit<JWTPayload, 'iat' | 'exp'>): Promi
   return await new SignJWT(payload)
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
-    .setExpirationTime(process.env.JWT_EXPIRES_IN || '7d')
+    .setExpirationTime((process.env.JWT_EXPIRES_IN || '7d').trim())
     .sign(JWT_SECRET);
 }
 

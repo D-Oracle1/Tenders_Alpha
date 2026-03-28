@@ -37,8 +37,7 @@ export default function LoginForm() {
       }
 
       toast.success('Login successful!');
-      router.push('/admin/dashboard');
-      router.refresh();
+      window.location.href = '/admin/dashboard';
     } catch (error: any) {
       toast.error(error.message || 'Login failed');
     }

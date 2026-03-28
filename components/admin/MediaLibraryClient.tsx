@@ -189,7 +189,7 @@ export default function MediaLibraryClient() {
                   </td>
                   <td className="px-4 py-3 hidden md:table-cell text-sm text-gray-500">{file.type}</td>
                   <td className="px-4 py-3 hidden md:table-cell text-sm text-gray-500">{file.size ? formatFileSize(file.size) : '-'}</td>
-                  <td className="px-4 py-3 hidden sm:table-cell text-sm text-gray-500">{new Date(file.createdAt).toLocaleDateString()}</td>
+                  <td className="px-4 py-3 hidden sm:table-cell text-sm text-gray-500" suppressHydrationWarning>{new Date(file.createdAt).toLocaleDateString()}</td>
                   <td className="px-4 py-3">
                     <div className="flex justify-end gap-1">
                       <button onClick={() => { navigator.clipboard.writeText(file.url); toast.success('URL copied!'); }} className="p-1.5 rounded hover:bg-gray-100 text-blue-500 text-xs font-medium">Copy URL</button>

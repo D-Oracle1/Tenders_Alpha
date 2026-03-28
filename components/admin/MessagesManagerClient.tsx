@@ -113,7 +113,7 @@ export default function MessagesManagerClient() {
                     <p className="text-xs text-gray-400 truncate">{msg.subject || msg.message.substring(0, 60)}</p>
                   </div>
                   <div className="flex flex-col items-end gap-1 flex-shrink-0">
-                    <span className="text-xs text-gray-400">{new Date(msg.createdAt).toLocaleDateString()}</span>
+                    <span className="text-xs text-gray-400" suppressHydrationWarning>{new Date(msg.createdAt).toLocaleDateString()}</span>
                     <span className={cn('text-xs px-2 py-0.5 rounded-full', msg.status === 'UNREAD' ? 'bg-accent/10 text-accent' : 'bg-gray-100 text-gray-500')}>
                       {msg.status.toLowerCase()}
                     </span>
@@ -140,7 +140,7 @@ export default function MessagesManagerClient() {
                   <div><p className="text-gray-500">Email</p><a href={`mailto:${selected.email}`} className="font-semibold text-primary">{selected.email}</a></div>
                   {selected.phone && <div><p className="text-gray-500">Phone</p><p className="font-semibold">{selected.phone}</p></div>}
                   {selected.company && <div><p className="text-gray-500">Company</p><p className="font-semibold">{selected.company}</p></div>}
-                  <div><p className="text-gray-500">Date</p><p className="font-semibold">{new Date(selected.createdAt).toLocaleString()}</p></div>
+                  <div><p className="text-gray-500">Date</p><p className="font-semibold" suppressHydrationWarning>{new Date(selected.createdAt).toLocaleString()}</p></div>
                   <div><p className="text-gray-500">Status</p><p className="font-semibold capitalize">{selected.status.toLowerCase()}</p></div>
                 </div>
                 {selected.subject && (

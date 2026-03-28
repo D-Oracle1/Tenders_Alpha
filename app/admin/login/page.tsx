@@ -1,8 +1,9 @@
 import LoginForm from '@/components/admin/LoginForm';
+import Image from 'next/image';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Admin Login | Tenders General Merchant',
+  title: 'Admin Login | Tenders Alpha',
 };
 
 export default function LoginPage() {
@@ -12,10 +13,9 @@ export default function LoginPage() {
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <span className="text-primary font-bold text-2xl font-heading">TG</span>
+            <Image src="/logo.png" alt="Tenders Alpha" width={48} height={48} className="object-contain" />
           </div>
-          <h1 className="text-white text-2xl font-bold font-heading">CMS Admin Panel</h1>
-          <p className="text-white/60 text-sm mt-1">Tenders General Merchant Ltd.</p>
+          <h1 className="text-white text-2xl font-bold font-heading">Tenders Alpha Admin Panel</h1>
         </div>
 
         <LoginForm />

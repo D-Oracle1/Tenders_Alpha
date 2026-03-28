@@ -22,28 +22,28 @@ export default function SectionHeader({
 }: SectionHeaderProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-      className={cn(centered ? 'text-center' : 'text-left', 'mb-12', className)}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      className={cn(centered ? 'text-center' : 'text-left', 'mb-14', className)}
     >
       {badge && (
-        <span
-          className={cn(
-            'inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold mb-4',
-            light
-              ? 'bg-white/20 text-white'
-              : 'bg-accent/10 text-accent border border-accent/20'
-          )}
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-accent"></span>
-          {badge}
-        </span>
+        <div className={cn('flex items-center gap-3 mb-4', centered && 'justify-center')}>
+          <span className="w-6 h-px bg-accent" />
+          <span
+            className={cn(
+              'text-xs font-semibold tracking-widest uppercase',
+              light ? 'text-white/60' : 'text-accent'
+            )}
+          >
+            {badge}
+          </span>
+        </div>
       )}
       <h2
         className={cn(
-          'text-3xl md:text-4xl font-bold leading-tight font-heading',
+          'text-3xl md:text-4xl lg:text-5xl font-bold leading-tight font-heading',
           light ? 'text-white' : 'text-primary'
         )}
       >
@@ -52,15 +52,14 @@ export default function SectionHeader({
       {subtitle && (
         <p
           className={cn(
-            'mt-4 text-lg leading-relaxed max-w-2xl',
+            'mt-5 text-base md:text-lg leading-relaxed max-w-2xl text-gray-500',
             centered && 'mx-auto',
-            light ? 'text-white/70' : 'text-gray-600'
+            light && 'text-white/50'
           )}
         >
           {subtitle}
         </p>
       )}
-      <div className={cn('mt-4 w-16 h-1 rounded-full', centered && 'mx-auto', 'bg-accent')} />
     </motion.div>
   );
 }

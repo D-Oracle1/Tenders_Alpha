@@ -3,7 +3,12 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
-export default function AboutHero() {
+interface Props {
+  foundedYear?: string;
+  incorporatedYear?: string;
+}
+
+export default function AboutHero({ foundedYear, incorporatedYear }: Props) {
   return (
     <section className="relative py-28 bg-primary overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary-800 to-primary-900" />
@@ -16,11 +21,11 @@ export default function AboutHero() {
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
           <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 px-4 py-1.5 rounded-full text-sm font-medium mb-6">
             <span className="w-2 h-2 bg-accent rounded-full"></span>
-            Established 2009 • Incorporated 2012
+            {foundedYear ? `Established ${foundedYear}` : 'Established 2009'}{incorporatedYear ? ` • Incorporated ${incorporatedYear}` : ' • Incorporated 2012'}
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-heading">About Our Company</h1>
           <p className="text-white/70 text-xl max-w-2xl mx-auto leading-relaxed">
-            Tenders General Merchant Ltd. — Building Nigeria's infrastructure and creating lasting
+            Tenders Alpha — Building Nigeria's infrastructure and creating lasting
             value through excellence, innovation, and integrity.
           </p>
           <div className="flex flex-wrap gap-2 justify-center mt-6 text-sm text-white/60">
