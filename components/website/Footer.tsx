@@ -21,7 +21,17 @@ const services = [
   { label: 'Vocational Skills', href: '/services/vocational-skills' },
 ];
 
-export default function Footer({ companyName = 'Tenders Alpha Limited' }: { companyName?: string }) {
+export default function Footer({
+  companyName = 'Tenders Alpha Limited',
+  companyDescription = '',
+  foundedYear = '2009',
+  incorporatedYear = '2012',
+}: {
+  companyName?: string;
+  companyDescription?: string;
+  foundedYear?: string;
+  incorporatedYear?: string;
+}) {
   return (
     <footer className="bg-primary text-white">
       {/* Main Footer */}
@@ -44,9 +54,8 @@ export default function Footer({ companyName = 'Tenders Alpha Limited' }: { comp
               </div>
             </div>
             <p className="text-white/70 text-sm leading-relaxed mb-6">
-              A multi-faceted indigenous company with interests in Building Construction, Civil Engineering,
-              Oil & Gas Procurement, Equipment Supply, Cargo Handling, Beauty/Cosmetics, and Vocational Skills.
-              Founded 2009 | Incorporated 2012.
+              {companyDescription || 'A multi-faceted indigenous company delivering excellence across construction, engineering, and procurement.'}{' '}
+              Founded {foundedYear} | Incorporated {incorporatedYear}.
             </p>
             <div className="flex gap-3">
               {[
