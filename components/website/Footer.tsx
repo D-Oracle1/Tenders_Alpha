@@ -17,6 +17,7 @@ const services = [
   { label: 'Oil & Gas Procurement', href: '/services/oil-gas-procurement' },
   { label: 'Equipment Supply', href: '/services/equipment-supply' },
   { label: 'Cargo Handling', href: '/services/cargo-handling' },
+  { label: 'Logistics', href: '/services/logistics' },
   { label: 'Beauty / Cosmetics', href: '/services/beauty-cosmetics' },
   { label: 'Vocational Skills', href: '/services/vocational-skills' },
 ];
