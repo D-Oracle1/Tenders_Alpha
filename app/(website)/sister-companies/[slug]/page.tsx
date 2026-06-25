@@ -43,10 +43,10 @@ export default async function SisterCompanyDetailPage({ params }: { params: { sl
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
               <h1 className="text-3xl font-bold text-primary mb-4 font-heading">{company.name}</h1>
-              <p className="text-gray-600 text-lg leading-relaxed mb-6">{company.description}</p>
+              <p className="text-gray-600 text-lg leading-relaxed text-justify mb-6">{company.description}</p>
 
               {company.content && (
-                <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: company.content }} />
+                <div className="prose prose-lg max-w-none text-justify" dangerouslySetInnerHTML={{ __html: company.content }} />
               )}
 
               {company.services.length > 0 && (

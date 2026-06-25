@@ -67,7 +67,7 @@ export default function AboutCompanyOverview({
               A Legacy of Building Excellence
             </h2>
             {paragraphs.map((para, i) => (
-              <p key={i} className={`text-gray-600 leading-relaxed ${i < paragraphs.length - 1 ? 'mb-4' : 'mb-6'}`}>
+              <p key={i} className={`text-gray-600 leading-relaxed text-justify ${i < paragraphs.length - 1 ? 'mb-4' : 'mb-6'}`}>
                 {para}
               </p>
             ))}

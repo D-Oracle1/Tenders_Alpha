@@ -75,10 +75,7 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  icons: {
-    icon: '/logo.png',
-    apple: '/logo.png',
-  },
+  // Favicon & app icons are served from app/icon.png and app/apple-icon.png
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

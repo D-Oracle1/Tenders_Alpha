@@ -31,8 +31,8 @@ export default function FormattedText({ text, className, variant = 'body' }: For
 
   const paragraphClass =
     variant === 'lead'
-      ? 'text-gray-600 text-lg leading-relaxed'
-      : 'text-gray-700 leading-relaxed';
+      ? 'text-gray-600 text-lg leading-relaxed text-justify'
+      : 'text-gray-700 leading-relaxed text-justify';
 
   return (
     <div className={className}>

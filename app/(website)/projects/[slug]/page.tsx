@@ -64,10 +64,10 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
               </div>
 
               <h1 className="text-3xl font-bold text-primary mb-4 font-heading">{project.projectName}</h1>
-              <p className="text-gray-600 text-lg leading-relaxed mb-6">{project.description}</p>
+              <p className="text-gray-600 text-lg leading-relaxed text-justify mb-6">{project.description}</p>
 
               {project.content && (
-                <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: project.content }} />
+                <div className="prose prose-lg max-w-none text-justify" dangerouslySetInnerHTML={{ __html: project.content }} />
               )}
 
               {project.images.length > 0 && (
