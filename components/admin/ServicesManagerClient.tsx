@@ -7,29 +7,40 @@ import toast from 'react-hot-toast';
 import { SERVICE_CATEGORY_LABELS, slugify } from '@/lib/utils';
 import MediaPickerModal from './MediaPickerModal';
 
+interface ServiceImage {
+  id?: string;
+  url: string;
+  alt?: string | null;
+  order?: number;
+}
+
 interface Service {
   id: string;
   title: string;
   slug: string;
   description: string;
+  content?: string | null;
   featuredImage?: string | null;
   category: string;
   order: number;
   isActive: boolean;
   metaTitle?: string | null;
   metaDescription?: string | null;
+  images?: ServiceImage[];
 }
 
 const emptyService: Partial<Service> = {
   title: '',
   slug: '',
   description: '',
+  content: '',
   featuredImage: '',
   category: 'OTHER',
   order: 0,
   isActive: true,
   metaTitle: '',
   metaDescription: '',
+  images: [],
 };
 
 export default function ServicesManagerClient() {
@@ -38,7 +49,8 @@ export default function ServicesManagerClient() {
   const [editing, setEditing] = useState<Partial<Service> | null>(null);
   const [isNew, setIsNew] = useState(false);
   const [search, setSearch] = useState('');
-  const [showMediaPicker, setShowMediaPicker] = useState(false);
+  // null = closed; { type:'featured' } targets featured image; { type:'gallery', index } targets a gallery slot
+  const [mediaTarget, setMediaTarget] = useState<{ type: 'featured' } | { type: 'gallery'; index: number } | null>(null);
 
   useEffect(() => { fetchServices(); }, []);
 
@@ -92,6 +104,37 @@ export default function ServicesManagerClient() {
       });
       fetchServices();
     } catch { toast.error('Update failed'); }
+  }
+
+  // ---- Gallery image helpers ----
+  function updateImages(next: ServiceImage[]) {
+    setEditing((prev) => (prev ? { ...prev, images: next } : prev));
+  }
+  function addImage() {
+    updateImages([...(editing?.images || []), { url: '', alt: '' }]);
+  }
+  function setImageField(index: number, field: 'url' | 'alt', value: string) {
+    const next = [...(editing?.images || [])];
+    next[index] = { ...next[index], [field]: value };
+    updateImages(next);
+  }
+  function removeImage(index: number) {
+    updateImages((editing?.images || []).filter((_, i) => i !== index));
+  }
+  function handleMediaSelect(url: string) {
+    if (!mediaTarget) return;
+    if (mediaTarget.type === 'featured') {
+      setEditing((prev) => (prev ? { ...prev, featuredImage: url } : prev));
+    } else {
+      const next = [...(editing?.images || [])];
+      if (next[mediaTarget.index]) {
+        next[mediaTarget.index] = { ...next[mediaTarget.index], url };
+      } else {
+        next.push({ url, alt: '' });
+      }
+      updateImages(next);
+    }
+    setMediaTarget(null);
   }
 
   const filtered = services.filter((s) =>
@@ -214,13 +257,49 @@ export default function ServicesManagerClient() {
                 </div>
                 <div>
                   <label className="form-label">Description *</label>
-                  <textarea value={editing.description || ''} onChange={(e) => setEditing({ ...editing, description: e.target.value })} className="form-input resize-none" rows={4} />
+                  <textarea value={editing.description || ''} onChange={(e) => setEditing({ ...editing, description: e.target.value })} className="form-input resize-none" rows={4} placeholder="Short summary shown on the service card." />
                 </div>
                 <div>
-                  <label className="form-label">Featured Image URL</label>
+                  <label className="form-label">Full Details (optional)</label>
+                  <textarea value={editing.content || ''} onChange={(e) => setEditing({ ...editing, content: e.target.value })} className="form-input resize-none" rows={6} placeholder={'Longer description shown on the service page.\n\nLeave a blank line between paragraphs.\nStart a line with "- " for bullet points.'} />
+                  <p className="text-xs text-gray-400 mt-1">Tip: separate paragraphs with a blank line, and start lines with &quot;- &quot; for bullet lists. They&apos;ll be formatted automatically.</p>
+                </div>
+                <div>
+                  <label className="form-label">Featured (Display) Image URL</label>
                   <div className="flex gap-2">
                     <input value={editing.featuredImage || ''} onChange={(e) => setEditing({ ...editing, featuredImage: e.target.value })} className="form-input flex-1" placeholder="/images/services/..." />
-                    <button type="button" onClick={() => setShowMediaPicker(true)} className="btn-outline text-sm">Browse</button>
+                    <button type="button" onClick={() => setMediaTarget({ type: 'featured' })} className="btn-outline text-sm">Browse</button>
+                  </div>
+                  <p className="text-xs text-gray-400 mt-1">Shown on the services list and as the first image in the gallery.</p>
+                </div>
+
+                {/* Gallery images */}
+                <div>
+                  <div className="flex items-center justify-between">
+                    <label className="form-label mb-0">Gallery Images</label>
+                    <button type="button" onClick={addImage} className="text-sm text-primary font-medium inline-flex items-center gap-1 hover:underline">
+                      <Plus size={14} /> Add image
+                    </button>
+                  </div>
+                  <p className="text-xs text-gray-400 mt-1 mb-2">Extra images shown when the service page is opened.</p>
+                  <div className="space-y-2">
+                    {(editing.images || []).map((img, index) => (
+                      <div key={index} className="flex gap-2 items-start">
+                        <div className="flex-1 space-y-2">
+                          <div className="flex gap-2">
+                            <input value={img.url} onChange={(e) => setImageField(index, 'url', e.target.value)} className="form-input flex-1" placeholder="/images/services/..." />
+                            <button type="button" onClick={() => setMediaTarget({ type: 'gallery', index })} className="btn-outline text-sm">Browse</button>
+                          </div>
+                          <input value={img.alt || ''} onChange={(e) => setImageField(index, 'alt', e.target.value)} className="form-input" placeholder="Image description (alt text, optional)" />
+                        </div>
+                        <button type="button" onClick={() => removeImage(index)} className="p-2 mt-0.5 rounded hover:bg-red-50 text-red-500" title="Remove image">
+                          <Trash2 size={15} />
+                        </button>
+                      </div>
+                    ))}
+                    {(editing.images || []).length === 0 && (
+                      <p className="text-sm text-gray-400 italic">No gallery images yet.</p>
+                    )}
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
@@ -252,10 +331,10 @@ export default function ServicesManagerClient() {
         )}
       </AnimatePresence>
 
-      {showMediaPicker && (
+      {mediaTarget && (
         <MediaPickerModal
-          onSelect={(url) => { setEditing(prev => prev ? { ...prev, featuredImage: url } : prev); setShowMediaPicker(false); }}
-          onClose={() => setShowMediaPicker(false)}
+          onSelect={handleMediaSelect}
+          onClose={() => setMediaTarget(null)}
         />
       )}
     </div>

@@ -2,10 +2,11 @@ export const revalidate = 0;
 
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
 import Link from 'next/link';
 import prisma from '@/lib/prisma';
 import PageHero from '@/components/website/PageHero';
+import FormattedText from '@/components/website/FormattedText';
+import ServiceGallery from '@/components/website/ServiceGallery';
 import { SERVICE_CATEGORY_LABELS } from '@/lib/utils';
 import { ArrowRight, FileText } from 'lucide-react';
 
@@ -33,6 +34,15 @@ export default async function ServiceDetailPage({ params }: Props) {
 
   if (!service) notFound();
 
+  // Combine the display (featured) image with the gallery images, avoiding
+  // duplicates, so opening a service shows the full variety of its photos.
+  const galleryImages = [
+    ...(service.featuredImage ? [{ url: service.featuredImage, alt: service.title }] : []),
+    ...service.images
+      .filter((img) => img.url && img.url !== service.featuredImage)
+      .map((img) => ({ url: img.url, alt: img.alt })),
+  ];
+
   const relatedServices = await prisma.service.findMany({
     where: { isActive: true, id: { not: service.id } },
     take: 3,
@@ -55,37 +65,19 @@ export default async function ServiceDetailPage({ params }: Props) {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Main Content */}
             <div className="lg:col-span-2">
-              {service.featuredImage && (
-                <div className="relative h-80 rounded-2xl overflow-hidden mb-8">
-                  <Image src={service.featuredImage} alt={service.title} fill className="object-cover" />
-                </div>
+              {galleryImages.length > 0 && (
+                <ServiceGallery images={galleryImages} title={service.title} />
               )}
 
               <span className="badge-primary mb-4 inline-flex">
                 {SERVICE_CATEGORY_LABELS[service.category] || service.category}
               </span>
               <h1 className="text-3xl font-bold text-primary mb-4 font-heading">{service.title}</h1>
-              <p className="text-gray-600 text-lg leading-relaxed mb-6">{service.description}</p>
+
+              <FormattedText text={service.description} variant="lead" className="mb-6" />
 
               {service.content && (
-                <div
-                  className="prose prose-lg max-w-none text-gray-700"
-                  dangerouslySetInnerHTML={{ __html: service.content }}
-                />
-              )}
-
-              {/* Gallery */}
-              {service.images.length > 0 && (
-                <div className="mt-10">
-                  <h3 className="text-xl font-bold text-primary mb-6 font-heading">Gallery</h3>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {service.images.map((img) => (
-                      <div key={img.id} className="relative aspect-square rounded-xl overflow-hidden">
-                        <Image src={img.url} alt={img.alt || service.title} fill className="object-cover hover:scale-105 transition-transform duration-300" />
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <FormattedText text={service.content} variant="body" className="mt-2" />
               )}
 
               {/* Documents */}
@@ -120,8 +112,8 @@ export default async function ServiceDetailPage({ params }: Props) {
                   Request a Quote
                   <ArrowRight size={16} />
                 </Link>
-                <a href="tel:07065220758" className="mt-3 block text-center text-white/70 hover:text-white text-sm transition-colors">
-                  or call: 07065220758
+                <a href="tel:08101365496" className="mt-3 block text-center text-white/70 hover:text-white text-sm transition-colors">
+                  or call: 08101365496
                 </a>
               </div>
 

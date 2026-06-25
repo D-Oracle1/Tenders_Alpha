@@ -109,13 +109,13 @@ export default function HomeCTA() {
               </Link>
 
               <a
-                href="tel:07065220758"
+                href="tel:08101365496"
                 className="group inline-flex items-center gap-3 text-white/60 hover:text-white transition-colors duration-300 text-sm font-medium"
               >
                 <span className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:border-white/60 transition-colors">
                   <Phone size={14} />
                 </span>
-                07065 220 758
+                08101 365 496
               </a>
             </motion.div>
           </div>

@@ -43,12 +43,26 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
       );
     }
 
-    const data = validation.data;
+    const { images, ...data } = validation.data;
+
     const service = await prisma.service.update({
       where: { id: params.id },
       data: {
         ...data,
         category: (data.category as any) || 'OTHER',
+        // When an images array is provided, replace the existing gallery with it.
+        ...(images !== undefined
+          ? {
+              images: {
+                deleteMany: {},
+                create: images.map((img, i) => ({
+                  url: img.url,
+                  alt: img.alt || null,
+                  order: img.order ?? i,
+                })),
+              },
+            }
+          : {}),
       },
       include: {
         images: { orderBy: { order: 'asc' } },

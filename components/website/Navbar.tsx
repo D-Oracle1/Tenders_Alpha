@@ -20,6 +20,7 @@ const navLinks = [
       { label: 'Oil & Gas Procurement', href: '/services/oil-gas-procurement' },
       { label: 'Equipment Supply', href: '/services/equipment-supply' },
       { label: 'Cargo Handling', href: '/services/cargo-handling' },
+      { label: 'Logistics', href: '/services/logistics' },
       { label: 'Disinfection Machines', href: '/services/disinfection-machines' },
       { label: 'Beauty / Cosmetics', href: '/services/beauty-cosmetics' },
       { label: 'Vocational Skills', href: '/services/vocational-skills' },
@@ -53,9 +54,9 @@ export default function Navbar({ companyName = 'Tenders Alpha Limited' }: { comp
       <div className="bg-primary text-white py-2 hidden md:block">
         <div className="container-custom flex justify-between items-center text-sm">
           <div className="flex items-center gap-6">
-            <a href="tel:07065220758" className="flex items-center gap-2 hover:text-accent transition-colors">
+            <a href="tel:08101365496" className="flex items-center gap-2 hover:text-accent transition-colors">
               <Phone size={14} />
-              <span>07065220758</span>
+              <span>08101365496</span>
             </a>
             <a href="tel:08073175838" className="flex items-center gap-2 hover:text-accent transition-colors">
               <Phone size={14} />

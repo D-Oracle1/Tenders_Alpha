@@ -50,7 +50,7 @@ export default function AboutCompanyOverview({
     { icon: Building, label: 'Incorporated', value: incorporatedYear || '2012' },
     { icon: MapPin, label: 'Head Office', value: headOfficeCity || 'Lekki, Lagos' },
     { icon: Globe, label: 'International', value: internationalPresence || 'UK · USA · Australia' },
-    { icon: User, label: 'Director of Works', value: directorOfWorks || 'Mrs Soibi Shedrach-Essumei' },
+    { icon: User, label: 'Operational Director', value: directorOfWorks || 'Mrs Soibi Shedrach-Essumei' },
     { icon: User, label: 'Director', value: directorName || 'Shedrach Essumei' },
   ];
 

@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const data = validation.data;
+    const { images, ...data } = validation.data;
     const slug = data.slug || slugify(data.title);
 
     const service = await prisma.service.create({
@@ -54,9 +54,20 @@ export async function POST(request: NextRequest) {
         ...data,
         slug,
         category: (data.category as any) || 'OTHER',
+        ...(images && images.length > 0
+          ? {
+              images: {
+                create: images.map((img, i) => ({
+                  url: img.url,
+                  alt: img.alt || null,
+                  order: img.order ?? i,
+                })),
+              },
+            }
+          : {}),
       },
       include: {
-        images: true,
+        images: { orderBy: { order: 'asc' } },
         documents: true,
       },
     });

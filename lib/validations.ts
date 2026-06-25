@@ -39,6 +39,15 @@ export const serviceSchema = z.object({
   isActive: z.boolean().optional(),
   metaTitle: z.string().nullish(),
   metaDescription: z.string().nullish(),
+  images: z
+    .array(
+      z.object({
+        url: z.string().min(1),
+        alt: z.string().nullish(),
+        order: z.number().int().min(0).optional(),
+      })
+    )
+    .optional(),
 });
 
 export const projectSchema = z.object({

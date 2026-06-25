@@ -107,7 +107,7 @@ export default function SettingsManagerClient() {
     incorporated_year: 'Incorporated Year',
     head_office_city: 'Head Office Location (e.g. Lekki, Lagos)',
     international_presence: 'International Presence (e.g. UK · USA · Australia)',
-    director_of_works: 'Director of Works',
+    director_of_works: 'Operational Director',
     director_name: 'Director',
     company_profile_url: 'Company Profile URL (Google Drive or direct link)',
     home_about_title: 'About Section Title',

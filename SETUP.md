@@ -316,7 +316,7 @@ Key tables:
 
 - **Head Office**: 18 Essumei Street Off White House Bus Stop, Okokomaiko Badagry Expressway, Lagos State
 - **Branch Office**: 9 Farm Road Off Location Bus Stop, Mbuogba NTA Road, Port Harcourt, Rivers State
-- **Phone**: 07065220758 | 08073175838
+- **Phone**: 08101365496 | 08073175838
 - **Email**: tendersgeneralmerchant@gmail.com | okechukwuessumei@gmail.com
 - **Founded**: 2009 | **Incorporated**: 2012
 

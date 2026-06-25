@@ -48,16 +48,15 @@ export function stripHtml(html: string): string {
 }
 
 export const SERVICE_CATEGORY_LABELS: Record<string, string> = {
-  CONSTRUCTION: 'Building Construction',
+  CONSTRUCTION: 'Construction',
   CIVIL_ENGINEERING: 'Civil Engineering',
-  PROCUREMENT: 'Procurement',
   OIL_GAS: 'Oil & Gas',
-  SUPPLY: 'Supply',
-  DISINFECTION: 'Disinfection Technology',
-  AGRICULTURE: 'Agriculture',
-  CARGO_HANDLING: 'Cargo Handling',
   EQUIPMENT_SUPPLY: 'Equipment Supply',
-  OTHER: 'Other',
+  CARGO_HANDLING: 'Cargo Handling',
+  LOGISTICS: 'Logistics',
+  DISINFECTION: 'Disinfection',
+  AGRICULTURE: 'Agriculture',
+  OTHER: 'Other Services',
 };
 
 export const PROJECT_CATEGORY_LABELS: Record<string, string> = {
@@ -66,6 +65,7 @@ export const PROJECT_CATEGORY_LABELS: Record<string, string> = {
   OIL_GAS: 'Oil & Gas',
   PROCUREMENT: 'Procurement',
   AGRICULTURE: 'Agriculture',
+  LOGISTICS: 'Logistics',
   EQUIPMENT_SUPPLY: 'Equipment Supply',
   CARGO_HANDLING: 'Cargo Handling',
   OTHER: 'Other',

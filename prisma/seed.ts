@@ -1,5 +1,6 @@
 import { PrismaClient, UserRole, ServiceCategory, ProjectCategory, ProjectStatus } from '@prisma/client';
 import bcrypt from 'bcryptjs';
+import { applyEnrichments } from './enrich-services';
 
 const prisma = new PrismaClient();
 
@@ -119,6 +120,16 @@ async function main() {
       order: 5,
     },
     {
+      id: 'svc-logistics',
+      title: 'Logistics',
+      slug: 'logistics',
+      description:
+        'Reliable, end-to-end logistics and supply chain solutions across Nigeria and beyond — moving your goods safely, on time, and cost-effectively.',
+      category: ServiceCategory.LOGISTICS,
+      featuredImage: '/images/services/logistics.jpg',
+      order: 6,
+    },
+    {
       id: 'svc-disinfection',
       title: 'Disinfection Machines',
       slug: 'disinfection-machines',
@@ -155,6 +166,11 @@ async function main() {
     });
   }
   console.log('✅ Services created');
+
+  // Add formatted details + gallery images to each service (single source of
+  // truth shared with prisma/enrich-services.ts)
+  await applyEnrichments(prisma);
+  console.log('✅ Service details & gallery images created');
 
   // Create sister companies
   const sisterCompanies = [
@@ -365,7 +381,7 @@ async function main() {
     { key: 'incorporated_year', value: '2012', group: 'general', label: 'Incorporated Year' },
     { key: 'head_office_address', value: '18 Essumei Street Off White House Bus Stop Okokomaiko Badagry Expressway Lagos State', group: 'contact', label: 'Head Office Address' },
     { key: 'branch_office_address', value: '9 Farm Road Off Location Bus Stop Mbuogba NTA Road Port Harcourt Rivers State', group: 'contact', label: 'Branch Office Address' },
-    { key: 'phone_1', value: '07065220758', group: 'contact', label: 'Primary Phone' },
+    { key: 'phone_1', value: '08101365496', group: 'contact', label: 'Primary Phone' },
     { key: 'phone_2', value: '08073175838', group: 'contact', label: 'Secondary Phone' },
     { key: 'email_1', value: 'info@tendersalpha.com', group: 'contact', label: 'Primary Email' },
     { key: 'email_2', value: 'okechukwuessumei@gmail.com', group: 'contact', label: 'Secondary Email' },

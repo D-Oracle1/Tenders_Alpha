@@ -7,7 +7,7 @@ import PageHero from '@/components/website/PageHero';
 import SectionHeader from '@/components/website/SectionHeader';
 
 export const metadata: Metadata = {
-  title: 'Our Services — Procurement, Construction & Tender Management Nigeria',
+  title: 'Our Services — Procurement, Logistics, Construction & Tender Management Nigeria',
   description:
     'Tenders Alpha delivers procurement, construction, oil & gas, equipment supply, cargo handling, beauty/cosmetics, and vocational skills services across Nigeria and Africa.',
 };
@@ -22,7 +22,7 @@ export default async function ServicesPage() {
     <>
       <PageHero
         title="Our Services"
-        subtitle="Comprehensive solutions across construction, engineering, procurement, beauty, and vocational sectors."
+        subtitle="Comprehensive solutions across construction, engineering, procurement, Logistics, beauty, and vocational sectors."
         breadcrumbs={[{ label: 'Services' }]}
       />
       <section className="py-20 bg-white">
@@ -30,7 +30,7 @@ export default async function ServicesPage() {
           <SectionHeader
             badge="What We Offer"
             title="Full Range of Services"
-            subtitle="From building construction to oil & gas procurement, we have the expertise and resources to handle your most demanding projects."
+            subtitle="From building construction to oil & gas procurement and Logistics, we have the expertise and resources to handle your most demanding projects."
           />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, i) => (
