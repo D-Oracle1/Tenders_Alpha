@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Edit2, Trash2, X, Save } from 'lucide-react';
 import toast from 'react-hot-toast';
+import ImageUploadCropper from './ImageUploadCropper';
 
 interface TeamMember {
   id: string;
@@ -55,7 +56,11 @@ export default function TeamManagerClient() {
             <div key={m.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold">{m.name.charAt(0)}</div>
+                  {m.image ? (
+                    <img src={m.image} alt={m.name} className="w-10 h-10 rounded-full object-cover" />
+                  ) : (
+                    <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold">{m.name.charAt(0)}</div>
+                  )}
                   <div><p className="font-semibold text-gray-900">{m.name}</p><p className="text-accent text-sm">{m.position}</p></div>
                 </div>
                 <div className="flex gap-1">
@@ -83,7 +88,14 @@ export default function TeamManagerClient() {
                   <div><label className="form-label">Email</label><input type="email" value={editing.email || ''} onChange={(e) => setEditing({ ...editing, email: e.target.value })} className="form-input" /></div>
                   <div><label className="form-label">LinkedIn URL</label><input value={editing.linkedIn || ''} onChange={(e) => setEditing({ ...editing, linkedIn: e.target.value })} className="form-input" /></div>
                 </div>
-                <div><label className="form-label">Photo URL</label><input value={editing.image || ''} onChange={(e) => setEditing({ ...editing, image: e.target.value })} className="form-input" /></div>
+                <ImageUploadCropper
+                  label="Photo"
+                  value={editing.image || ''}
+                  folder="team"
+                  round
+                  aspect={1}
+                  onChange={(url) => setEditing((prev) => (prev ? { ...prev, image: url } : prev))}
+                />
                 <div className="flex items-center gap-3">
                   <input type="checkbox" id="tmActive" checked={editing.isActive !== false} onChange={(e) => setEditing({ ...editing, isActive: e.target.checked })} className="w-4 h-4" />
                   <label htmlFor="tmActive" className="text-sm font-medium">Active</label>
